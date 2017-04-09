@@ -5,7 +5,13 @@ Account
 @section('content')
 
 <section class="row new-post">
-    <div class="col-md-6 col-md-offset-3">
+    
+    @if(Storage::disk('local')->has($user->first_name.'-'.$user->id.'.jpg'))
+     <div class="col-md-3">
+            <img src="{{route('account.image',['filename'=>$user->first_name.'-'.$user->id.'.jpg'])}}" alt="" class="img-responsive">
+        </div>
+    @endif
+    <div class="col-md-9 ">
         <header><h3>Your Account </h3></header>
         <form action="{{route('account.save') }}" method="post" enctype="multipart/form-data">
                 <div class="form-group">
@@ -21,12 +27,6 @@ Account
         </form>	
     </div>
 </section>
-@if(Storage::disk('local')->has($user->first_name.'-'.$user->id.'.jpg'))
-<section class="row new-post">
-    <div class="col-md-6 col-md-offset-3">
-        <img src="{{route('account.image',['filename'=>$user->first_name.'-'.$user->id.'.jpg'])}}" alt="" class="img-responsive">
-    </div>
-</section>
-@endif
+    
 @endsection
 

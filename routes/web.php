@@ -10,10 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-        Route::get('/', function () {
-                    return view('welcome');
-                })->name('home');
+//        Route::get('/', function () {
+//                    return view('welcome');
+//                })->name('home');
                 
+        Route::get('/',[
+            "uses" => "WelcomeController@getRedirectIfLoggedIn",
+            "as" => "home",
+        ]);
+        
         Route::post('/signup', [
             "uses" => "UserController@postSignUp",
             "as" => "signup",
